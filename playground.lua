@@ -14,7 +14,7 @@ end
 
 function testDifference()
     table_a = {"a", "c", "b"}
-    table_b = {"a", "b" }
+    table_b = {"a", "b", "e" }
 
     diff_a_to_b = difference(table_a, table_b)
     diff_b_to_a = difference(table_b, table_a)
@@ -35,7 +35,6 @@ function extractKey(key, data)
     return keys
 end
 
-
 function testExtractKey()
     local data = {
         {name = "Peter", age = 18},
@@ -48,4 +47,31 @@ function testExtractKey()
     print(inspect(keys))
 end
 
-testExtractKey()
+function transformArrayToMapByKey(key, data)
+    local map = {}
+    for k,value in pairs(data) do
+        map[value[key]] = value
+    end
+
+    return map
+end
+
+function testTransformArrayToMapByKey()
+    local data = {
+        {name = "Peter", age = 18},
+        {name = "Lili", age = 21},
+    }
+
+    local map = transformArrayToMapByKey("name", data)
+
+    print("map")
+    print(inspect(map))
+end
+
+function testDefaultValue()
+    local foo = nil or "bar"
+
+    print(foo)
+end
+
+testTransformArrayToMapByKey()
